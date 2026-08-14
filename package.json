@@ -1,0 +1,6 @@
+{
+  "name": "ferniss",
+  "devDependencies": {
+    "@types/bun": "latest"
+  }
+}
