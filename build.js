@@ -5,7 +5,7 @@ import { mkdirSync, rmSync, writeFileSync, cpSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadContent } from "./lib/content.js";
-import { pickStrings } from "./lib/i18n.js";
+import { t } from "./lib/i18n.js";
 import { processImages } from "./lib/images.js";
 import * as pages from "./templates/pages.js";
 import { imageAttributes } from "./templates/components.js";
@@ -24,7 +24,7 @@ export async function build() {
 
   const ctx = {
     ...content,
-    t: pickStrings(site.language),
+    t,
     url: (path = "") => site.basePath + path.replace(/^\//, ""),
     images,
     // Public URL of the best version of an image, optionally the smallest one at least `width` wide.
@@ -65,7 +65,7 @@ export async function build() {
   writeFileSync(join(outDir, ".nojekyll"), "");
 
   for (const warning of warnings) console.warn(`  ⚠ ${warning}`);
-  console.log(`✓ Built ${output.length} pages, ${pieces.length} pieces, ${content.media.length} images in ${Date.now() - started} ms → ${outDir}`);
+  console.log(`✓ Bygget ${output.length} sider, ${pieces.length} verk og ${content.media.length} bilder på ${Date.now() - started} ms → ${outDir}`);
   return { ok: true, warnings };
 }
 

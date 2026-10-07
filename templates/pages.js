@@ -20,13 +20,13 @@ export function homePage(ctx) {
     ${site.tagline ? `<p class="hero-tagline">${esc(site.tagline)}</p>` : ""}
     <div class="prose hero-intro">${site.intro}</div>
     <div class="hero-actions">
-      <a class="button" href="${url("works/")}">${esc(t.seeWorks)}</a>
-      <a class="link-arrow" href="${url("contact/")}">${esc(t.getInTouch)}</a>
+      <a class="button" href="${url("verk/")}">${esc(t.seeWorks)}</a>
+      <a class="link-arrow" href="${url("kontakt/")}">${esc(t.getInTouch)}</a>
     </div>
   </div>
   <figure class="hero-figure">
     <div class="arch">${img(ctx, heroImage, { eager: true, alt: heroPiece?.title ?? site.name, sizes: "(max-width: 860px) 100vw, 520px" })}</div>
-    ${heroPiece ? `<figcaption><a href="${url(`works/${heroPiece.slug}/`)}">${esc(heroPiece.title)}</a></figcaption>` : ""}
+    ${heroPiece ? `<figcaption><a href="${url(`verk/${heroPiece.slug}/`)}">${esc(heroPiece.title)}</a></figcaption>` : ""}
     <svg class="hero-ring" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="ring" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#ring">${esc(`${site.name} · ${site.tagline || t.works} · `.repeat(2))}</textPath></text></svg>
   </figure>
 </section>
@@ -35,7 +35,7 @@ ${featured.length ? `<section class="section">
   <header class="section-head">
     <h2>${esc(t.featured)}</h2>
     <p>${esc(t.featuredLead)}</p>
-    <a class="link-arrow" href="${url("works/")}">${esc(t.allWorks)}</a>
+    <a class="link-arrow" href="${url("verk/")}">${esc(t.allWorks)}</a>
   </header>
   ${pieceGrid(ctx, featured, { arch: true })}
 </section>` : ""}
@@ -44,13 +44,13 @@ ${collections.length ? `<section class="section">
   <header class="section-head"><h2>${esc(t.collections)}</h2></header>
   <div class="collection-rows">
   ${collections.map((c, i) => `<article class="collection-row">
-    <a class="collection-row-media" href="${url(`collections/${c.slug}/`)}">${img(ctx, c.cover, { sizes: "(max-width: 760px) 100vw, 55vw" })}</a>
+    <a class="collection-row-media" href="${url(`samlinger/${c.slug}/`)}">${img(ctx, c.cover, { sizes: "(max-width: 760px) 100vw, 55vw" })}</a>
     <div class="collection-row-text">
       <p class="eyebrow">${String(i + 1).padStart(2, "0")} — ${esc(t.pieces(c.pieces.length))}</p>
-      <h3><a href="${url(`collections/${c.slug}/`)}">${esc(c.title)}</a></h3>
+      <h3><a href="${url(`samlinger/${c.slug}/`)}">${esc(c.title)}</a></h3>
       <p>${esc(c.excerpt)}</p>
-      <div class="mini-strip">${c.pieces.slice(0, 4).map((p) => `<a href="${url(`works/${p.slug}/`)}" title="${esc(p.title)}">${img(ctx, p.images[0], { sizes: "64px" })}</a>`).join("")}</div>
-      <a class="link-arrow" href="${url(`collections/${c.slug}/`)}">${esc(t.viewCollection)}</a>
+      <div class="mini-strip">${c.pieces.slice(0, 4).map((p) => `<a href="${url(`verk/${p.slug}/`)}" title="${esc(p.title)}">${img(ctx, p.images[0], { sizes: "64px" })}</a>`).join("")}</div>
+      <a class="link-arrow" href="${url(`samlinger/${c.slug}/`)}">${esc(t.viewCollection)}</a>
     </div>
   </article>`).join("\n")}
   </div>
@@ -93,7 +93,7 @@ export function worksPage(ctx) {
   <div class="grid" data-filterable>${pieces.map((p) => pieceCard(ctx, p)).join("\n")}</div>
   <p class="empty" hidden>${esc(t.nothingHere)}</p>
 </section>`;
-  return page(ctx, "works/", { title: t.works, body });
+  return page(ctx, "verk/", { title: t.works, body });
 }
 
 export function collectionsPage(ctx) {
@@ -101,13 +101,13 @@ export function collectionsPage(ctx) {
   const body = `
 <section class="page-head"><h1>${esc(t.collections)}</h1></section>
 <section class="section collection-tiles">
-  ${collections.map((c) => `<a class="collection-tile" href="${url(`collections/${c.slug}/`)}">
+  ${collections.map((c) => `<a class="collection-tile" href="${url(`samlinger/${c.slug}/`)}">
     <div class="arch">${img(ctx, c.cover)}</div>
     <h2>${esc(c.title)}</h2>
     <p>${esc(t.pieces(c.pieces.length))}</p>
   </a>`).join("\n")}
 </section>`;
-  return page(ctx, "collections/", { title: t.collections, body });
+  return page(ctx, "samlinger/", { title: t.collections, body });
 }
 
 export function collectionPage(ctx, collection) {
@@ -115,7 +115,7 @@ export function collectionPage(ctx, collection) {
   const body = `
 <section class="page-head page-head-split">
   <div>
-    <p class="eyebrow"><a href="${ctx.url("collections/")}">${esc(t.collections)}</a></p>
+    <p class="eyebrow"><a href="${ctx.url("samlinger/")}">${esc(t.collections)}</a></p>
     <h1>${esc(collection.title)}</h1>
     ${detailsList(collection.details)}
   </div>
@@ -127,7 +127,7 @@ export function collectionPage(ctx, collection) {
   <p class="empty" hidden>${esc(t.nothingHere)}</p>
 </section>
 ${contactBand(ctx)}`;
-  return page(ctx, `collections/${collection.slug}/`, { title: collection.title, description: collection.excerpt, body, image: collection.cover });
+  return page(ctx, `samlinger/${collection.slug}/`, { title: collection.title, description: collection.excerpt, body, image: collection.cover });
 }
 
 export function piecePage(ctx, piece) {
@@ -140,7 +140,7 @@ export function piecePage(ctx, piece) {
   const more = siblings.filter((p) => p !== piece).slice(0, 4);
   const inquireLabel = { sold: t.inquireSimilar, notforsale: t.inquireSimilar, commission: t.inquireCommission }[piece.status] ?? t.inquire;
   const subject = encodeURIComponent(t.subjectOne(piece.title));
-  const shelfData = esc(JSON.stringify({ slug: piece.slug, title: piece.title, price: piece.price ?? "", url: url(`works/${piece.slug}/`), image: piece.images[0] ? ctx.src(piece.images[0], 200) : "" }));
+  const shelfData = esc(JSON.stringify({ slug: piece.slug, title: piece.title, price: piece.price ?? "", url: url(`verk/${piece.slug}/`), image: piece.images[0] ? ctx.src(piece.images[0], 200) : "" }));
 
   const body = `
 <article class="piece" data-piece-page>
@@ -152,7 +152,7 @@ export function piecePage(ctx, piece) {
   </div>
 
   <aside class="piece-label">
-    <p class="eyebrow"><a href="${url(`collections/${collection.slug}/`)}">${esc(collection.title)}</a></p>
+    <p class="eyebrow"><a href="${url(`samlinger/${collection.slug}/`)}">${esc(collection.title)}</a></p>
     <h1>${esc(piece.title)}</h1>
     <div class="piece-meta">
       ${statusDot(ctx, piece.status)}
@@ -169,8 +169,8 @@ export function piecePage(ctx, piece) {
 </article>
 
 <nav class="piece-nav">
-  <a href="${url(`works/${prev.slug}/`)}" rel="prev">← ${esc(prev.title)}</a>
-  <a href="${url(`works/${next.slug}/`)}" rel="next">${esc(next.title)} →</a>
+  <a href="${url(`verk/${prev.slug}/`)}" rel="prev">← ${esc(prev.title)}</a>
+  <a href="${url(`verk/${next.slug}/`)}" rel="next">${esc(next.title)} →</a>
 </nav>
 
 ${more.length ? `<section class="section">
@@ -184,7 +184,7 @@ ${more.length ? `<section class="section">
   <button class="lightbox-next" aria-label="${esc(t.next)}">→</button>
   <button class="lightbox-close" aria-label="${esc(t.close)}">×</button>
 </dialog>`;
-  return page(ctx, `works/${piece.slug}/`, { title: piece.title, description: piece.excerpt || collection.excerpt, body, image: piece.images[0], bodyClass: "piece-body" });
+  return page(ctx, `verk/${piece.slug}/`, { title: piece.title, description: piece.excerpt || collection.excerpt, body, image: piece.images[0], bodyClass: "piece-body" });
 }
 
 export function contentPage(ctx, p) {
@@ -216,7 +216,7 @@ export function contactPage(ctx) {
   </div>
   ${inquiryForm(ctx, { useShelf: true })}
 </section>`;
-  return page(ctx, "contact/", { title: t.contactTitle, body });
+  return page(ctx, "kontakt/", { title: t.contactTitle, body });
 }
 
 export function notFoundPage(ctx) {

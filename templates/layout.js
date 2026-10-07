@@ -12,7 +12,7 @@ export function layout(ctx, { title, description, body, path = "", image, bodyCl
   const section = path.split("/")[0];
 
   return `<!doctype html>
-<html lang="${esc(site.language)}">
+<html lang="nb">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -33,15 +33,15 @@ export function layout(ctx, { title, description, body, path = "", image, bodyCl
   <script src="${url("assets/site.js")}?v=${ctx.version}" defer></script>
 </head>
 <body class="${esc(bodyClass)}">
-  <a class="skip" href="#main">↓</a>
+  <a class="skip" href="#main">${esc(t.skipToContent)}</a>
   <header class="site-header">
     <a class="wordmark" href="${url("")}">${esc(site.name)}</a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">${esc(t.menu)}</button>
     <nav id="site-nav" class="site-nav">
-      ${navLink("works/", t.works, section === "works")}
-      ${ctx.collections.length > 1 ? navLink("collections/", t.collections, section === "collections") : ""}
+      ${navLink("verk/", t.works, section === "verk")}
+      ${ctx.collections.length > 1 ? navLink("samlinger/", t.collections, section === "samlinger") : ""}
       ${pages.map((page) => navLink(`${page.slug}/`, page.menu, section === page.slug)).join("")}
-      ${navLink("contact/", t.contact, section === "contact")}
+      ${navLink("kontakt/", t.contact, section === "kontakt")}
       <button class="shelf-toggle" aria-controls="shelf" aria-expanded="false" hidden>
         ${esc(t.shelf)} <span class="shelf-count" aria-live="polite">0</span>
       </button>
@@ -57,7 +57,7 @@ ${body}
       <header><h2>${esc(t.shelfTitle)}</h2><button class="shelf-close" aria-label="${esc(t.close)}">×</button></header>
       <ul class="shelf-list"></ul>
       <p class="shelf-empty">${esc(t.shelfEmpty)}</p>
-      <a class="button shelf-send" href="${url("contact/")}?shelf">${esc(t.shelfSend)}</a>
+      <a class="button shelf-send" href="${url("kontakt/")}?shelf">${esc(t.shelfSend)}</a>
     </div>
   </aside>
 

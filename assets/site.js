@@ -133,7 +133,7 @@
   const filters = $("[data-filters]");
   if (filters) {
     const grid = $("[data-filterable]");
-    let collection = new URLSearchParams(location.search).get("collection") ?? "";
+    let collection = new URLSearchParams(location.search).get("samling") ?? "";
     const available = $("[data-filter-available]", filters);
     const apply = () => {
       let shown = 0;
@@ -150,7 +150,7 @@
       if (!chip) return;
       collection = chip.dataset.filterCollection;
       const url = new URL(location.href);
-      collection ? url.searchParams.set("collection", collection) : url.searchParams.delete("collection");
+      collection ? url.searchParams.set("samling", collection) : url.searchParams.delete("samling");
       history.replaceState(null, "", url);
       apply();
     });

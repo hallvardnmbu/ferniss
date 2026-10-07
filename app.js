@@ -10,7 +10,7 @@ const dist = join(dir, "dist");
 function rebuild() {
   // A fresh process so template edits are picked up without restarting.
   const result = Bun.spawnSync(["bun", join(dir, "build.js")], { stdout: "inherit", stderr: "inherit", env: { ...process.env, BASE_PATH: "/" } });
-  if (result.exitCode !== 0) console.error("✗ Build failed — fix the error above and save again.");
+  if (result.exitCode !== 0) console.error("✗ Byggingen feilet — rett feilen over og lagre på nytt.");
 }
 
 export default async function ferniss(request) {
@@ -36,5 +36,5 @@ if (import.meta.main) {
   }
   const port = process.env.PORT ?? 3000;
   Bun.serve({ port, fetch: ferniss });
-  console.log(`Listening on http://localhost:${port}`);
+  console.log(`Nettsiden kjører på http://localhost:${port}`);
 }

@@ -28,8 +28,9 @@ bun run build     # → dist/
 - **The shelf (Hylla):** visitors collect pieces they're curious about, then
   send one inquiry covering all of them. It's kept in the browser; no backend.
 - **Inquiries** open the visitor's email app pre-filled (subject, pieces,
-  prices, links). Set `Form endpoint:` (e.g. Formspree) to post directly instead.
-- Norwegian or English interface, dark mode, responsive, works without
+  prices, links). Set `Skjema:` (e.g. a Formspree address) to post directly instead.
+- Norwegian throughout (interface, URLs such as `/verk/` and `/kontakt/`, build
+  messages, the editor's guide), dark mode, responsive, works without
   JavaScript, sitemap, Open Graph tags and a 404 page.
 
 ## How it's put together
@@ -40,7 +41,7 @@ lib/content.js    reads content/ into a data model; forgiving, warns instead of 
 lib/markdown.js   a small Markdown subset for descriptions
 lib/images.js     resizes photos to WebP + srcset with sharp, cached in .cache/
 lib/imagesize.js  reads image dimensions (incl. EXIF rotation) from file headers
-lib/i18n.js       interface text (nb, en); add a language by copying a block
+lib/i18n.js       all interface text shown to visitors
 templates/        layout, components and one function per page type
 assets/           style.css, site.js (progressive enhancement), favicon
 build.js          renders everything to dist/
@@ -48,19 +49,20 @@ app.js            dev server with rebuild-on-change
 ```
 
 Text files are a few `Key: value` lines, then `---`, then free text. Known keys
-(`Title`, `Price`, `Status` …, plus Norwegian aliases) drive behaviour. **Any
+(`Tittel`, `Pris`, `Status` …; English aliases also work) drive behaviour. **Any
 unknown key is shown as a detail on the label**, so the artist can add fields
-like `Glaze` or `Firing` without code changes. Folder names give the order (`01-…`)
+like `Glasur` or `Brenning` without code changes. Folder names give the order (`01-…`)
 and slugs (`Måne krukke` → `mane-krukke`).
 
-Theming: colours are CSS variables at the top of `assets/style.css`; `Accent:`
-in `site.txt` overrides `--accent`.
+Theming: colours are CSS variables at the top of `assets/style.css`;
+`Farge:` in `content/innstillinger.txt` overrides `--accent`.
 
 ## Deploying
 
-`.github/workflows/deploy.yml` builds and publishes to GitHub Pages on every push
-to `main` (enable it under *Settings → Pages → Source: GitHub Actions*). The
-artist can then upload photos and edit text straight in GitHub's web interface.
-`dist/` is plain static files, so any other static host works as well.
+`dist/` is plain static files, so any static host works (Netlify, Cloudflare
+Pages, GitHub Pages, a plain web server). Build with `BASE_PATH` set if the
+site is served from a sub-folder.
 
-The sample pots are SVG illustrations standing in for real photos.
+The sample pots are SVG illustrations standing in for real photos; replace them
+with JPG, PNG, WebP, AVIF, GIF or SVG files. HEIC (iPhone) isn't supported by
+browsers, so the build warns about those.

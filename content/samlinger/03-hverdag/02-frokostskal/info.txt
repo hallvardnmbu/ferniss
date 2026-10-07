@@ -1,0 +1,10 @@
+Tittel: Frokostskål
+Pris: 380 kr per stk.
+Status: På bestilling
+Fremhevet: ja
+Leire: Steintøy
+Glasur: Rust
+Størrelse: Ø 15 cm
+Tåler oppvaskmaskin: Ja
+---
+Akkurat stor nok til yoghurt og en neve bær. Varm rustfarge som blir mørkere der glasuren er tykk.

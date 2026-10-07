@@ -24,7 +24,7 @@ export function pieceCard(ctx, piece, { arch = false } = {}) {
   const [first, second] = piece.images;
   const collection = ctx.collectionBySlug[piece.collection];
   return `<article class="card${arch ? " card-arch" : ""}" data-collection="${piece.collection}" data-status="${piece.status}">
-  <a href="${ctx.url(`works/${piece.slug}/`)}">
+  <a href="${ctx.url(`verk/${piece.slug}/`)}">
     <div class="card-media${second ? " has-alt" : ""}">
       ${img(ctx, first)}
       ${second ? img(ctx, second, { className: "card-alt", alt: "" }) : ""}
@@ -41,14 +41,14 @@ export function pieceCard(ctx, piece, { arch = false } = {}) {
 export const pieceGrid = (ctx, pieces, options) =>
   `<div class="grid">${pieces.map((piece) => pieceCard(ctx, piece, options)).join("\n")}</div>`;
 
-// The inquiry form. Without a "Form endpoint" in site.txt it composes an email;
+// The inquiry form. Without a "Skjema" address in innstillinger.txt it composes an email;
 // with one (e.g. Formspree) it posts the message directly.
 export function inquiryForm(ctx, { pieces = [], useShelf = false, id = "inquiry" } = {}) {
   const { t, site } = ctx;
   return `<form class="inquiry" id="${id}" data-inquiry${useShelf ? " data-use-shelf" : ""} action="${esc(site.formEndpoint ?? `mailto:${site.email}`)}" method="post">
   <div class="inquiry-pieces"${pieces.length || useShelf ? "" : " hidden"}>
     <p class="eyebrow">${esc(t.inquiryAbout)}</p>
-    <ul>${pieces.map((piece) => `<li data-piece="${esc(piece.slug)}" data-title="${esc(piece.title)}" data-url="${esc(ctx.url(`works/${piece.slug}/`))}" data-price="${esc(piece.price ?? "")}">${esc(piece.title)}${piece.price ? ` <span>${esc(piece.price)}</span>` : ""}</li>`).join("")}</ul>
+    <ul>${pieces.map((piece) => `<li data-piece="${esc(piece.slug)}" data-title="${esc(piece.title)}" data-url="${esc(ctx.url(`verk/${piece.slug}/`))}" data-price="${esc(piece.price ?? "")}">${esc(piece.title)}${piece.price ? ` <span>${esc(piece.price)}</span>` : ""}</li>`).join("")}</ul>
   </div>
   <label><span>${esc(t.yourName)}</span><input name="name" autocomplete="name" required></label>
   <label><span>${esc(t.yourEmail)}</span><input name="email" type="email" autocomplete="email" required></label>
@@ -73,7 +73,7 @@ export function contactBand(ctx) {
   <div class="band-inner">
     <h2>${esc(t.ctaTitle)}</h2>
     <p>${esc(t.ctaText)}</p>
-    <a class="button button-light" href="${ctx.url("contact/")}">${esc(t.getInTouch)}</a>
+    <a class="button button-light" href="${ctx.url("kontakt/")}">${esc(t.getInTouch)}</a>
   </div>
 </section>`;
 }
