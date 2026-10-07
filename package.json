@@ -1,6 +1,15 @@
 {
   "name": "ferniss",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun app.js",
+    "build": "bun build.js"
+  },
   "devDependencies": {
     "@types/bun": "latest"
+  },
+  "optionalDependencies": {
+    "sharp": "^0.35.5"
   }
 }

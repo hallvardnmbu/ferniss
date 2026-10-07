@@ -1,0 +1,11 @@
+Name: Ferniss
+Tagline: Keramikk dreid for hånd
+Location: Verksted i Bergen
+Email: post@example.com
+Instagram: @ferniss.keramikk
+Language: nb
+Accent: #a4532f
+---
+Krukker, skåler og kopper dreid på skiva og brent i vedovn. Hver glasur blandes for hånd — av aske fra peisen, leire fra fjæra og litt tålmodighet.
+
+Alt er unikt. Ser du noe du liker, spør gjerne.
