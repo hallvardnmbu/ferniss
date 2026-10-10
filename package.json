@@ -9,7 +9,7 @@
   "devDependencies": {
     "@types/bun": "latest"
   },
-  "optionalDependencies": {
+  "dependencies": {
     "sharp": "^0.35.5"
   }
 }
