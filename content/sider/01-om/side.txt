@@ -1,0 +1,17 @@
+Tittel: Om
+Meny: Om meg
+Fremhevet: ja
+---
+Jeg heter Jens.
+
+Jeg er opptatt av ting som skal brukes. En skål er ikke ferdig før noen har spist av den.
+
+> «Ferniss» er et gammelt ord for glasur eller noe i den duren.
+
+## Verkstedet
+
+Jeg har ikke noe verksted enda :--(
+
+## Utstillinger
+
+- 2031 — *Månen* sin hovedbase

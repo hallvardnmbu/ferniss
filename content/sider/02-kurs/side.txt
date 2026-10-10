@@ -1,0 +1,4 @@
+Tittel: Kurs og verksted
+Meny: Kurs
+---
+Send meg et pip via [kontaktsiden](/kontakt/) for å få et privatkurs.
